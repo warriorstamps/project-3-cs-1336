@@ -28,7 +28,14 @@ public class Main
                     }
                     else if(num == 2) //search for a record
                     {
-    
+                        if() //null
+                        {
+                            //not found message here
+                        }
+                        else
+                        {
+                            //print cont.
+                        }
                     }
                     else if(num == 3) //edit a record
                     {
