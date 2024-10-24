@@ -34,11 +34,11 @@ public class Game implements Comparable<Game>
     @Override
     public String toString()
     {
-        return name + ", " + highscore + ", " + initials + ", " + plays + ", $" + getRevenue();
+        return name + ", " + highscore + ", " + initials + ", " + plays + ", $" + String.format("%.2f", getRevenue());
     }
 
     //compareTo method for names, used in search? and delete?? or sort??
-    public int compareTo(String targetName) 
+    private int compareTo(String targetName) 
     {
         //work in progress
         if(name.compareTo(targetName) > 0) //name greater than object (B > A)

@@ -4,9 +4,9 @@
 public class Node<T extends Game> implements Comparable<Node<T>>
 {
     //variables 
-    Node<T> left; //left pointer
-	Node<T> right; //right pointer
-	T payload;
+    private Node<T> left; //left pointer
+	private Node<T> right; //right pointer
+	private T payload;
 
 	//constructors
 	public Node(T payload)
@@ -15,27 +15,46 @@ public class Node<T extends Game> implements Comparable<Node<T>>
     }   
 
 	//accessors
-	public T getNode()
+	public T getPayload()
 	{
 		return payload; 
 	}
 
+    public Node<T> getLeftNode()
+    {
+        return left;
+    }
+
+    public Node<T> getRightNode()
+    {
+        return right;
+    }
+
 	//mutators
-	public void setNode(T payload)
+	public void setPayload(T payload)
 	{
 		this.payload = payload;
 	}
-
-    //uses game CompareTo
-    public int compareTo(String targetName) 
+    
+    public void setLeftNode(Node<T> left)
     {
-        return this.payload.compareTo(targetName);
+        this.left = left;
     }
+
+    public void setRightNode(Node<T> right)
+    {
+        this.right = right;
+    }
+    // //uses game CompareTo
+    // public int compareTo(String targetName) 
+    // {
+    //     return this.payload.compareTo(targetName);
+    // }
 
     @Override
     public int compareTo(Node<T> targetNode) 
     {
-        return this.compareTo(targetNode);
+        return this.payload.compareTo(targetNode.payload);
     }
 
     //uses game toString

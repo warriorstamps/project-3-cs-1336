@@ -3,7 +3,7 @@
  * adding, searching, deleting and editing a node
  * within the tree
  */
-import java.util.Queue; //quene class 
+//import java.util.Queue; //quene class 
 public class BinTree<T extends Game> 
 {
     private Node<T> root; //root pointer 
@@ -26,37 +26,44 @@ public class BinTree<T extends Game>
     }
 
     //used to recursive call insert
-    public void addRecursive(Node<T> curr, Node<T> newNode) 
+    private void addRecursive(Node<T> curr, Node<T> newNode) 
     {
         if (newNode.compareTo(curr) < 0) //new node is less than current node, left path 
         {
-            if(curr.left == null) //add if null
+            if(curr.getLeftNode() == null) //add if null
             {
-                curr.left = newNode;
+                curr.setLeftNode(newNode);
             }   
             else //right path 
             {
-                addRecursive(curr.left, newNode);
+                addRecursive(curr.getLeftNode(), newNode);
             }
         }
         else //new node is greater than current node, right path
         {
-            if(curr.right == null) //add if null
+            if(curr.getRightNode() == null) //add if null
             {
-                curr.right = newNode;
+                curr.setRightNode(newNode);
             }   
             else //right path 
             {
-                addRecursive(curr.right, newNode);
+                addRecursive(curr.getRightNode(), newNode);
             }
         }
     }
 
-    public Node<T> search(Node<T> targetNode) //search the BST for a specific node, says a not found message if node isnt found
+    public Node<T> search(T targetPayload) //search the BST for a specific node, says a not found message if node isnt found
     {
+        Node<T> targetNode = new Node<T>(targetPayload);
         //call recursive funcrion
         return searchRecursive(root, targetNode);
     }
+
+    // public Node<T> search(Node<T> targetNode) //search the BST for a specific node, says a not found message if node isnt found
+    // {
+    //     //call recursive funcrion
+    //     return searchRecursive(root, targetNode);
+    // }
 
     private Node<T> searchRecursive(Node<T> curr, Node<T> targetNode)
     {
@@ -66,11 +73,11 @@ public class BinTree<T extends Game>
         }
         if (curr.compareTo(targetNode) > 0) //left path
         {
-            return searchRecursive(curr.left, targetNode);
+            return searchRecursive(curr.getLeftNode(), targetNode);
         }
         else if (curr.compareTo(targetNode) < 0) //right path
         {
-            return searchRecursive(curr.right, targetNode);
+            return searchRecursive(curr.getRightNode(), targetNode);
         }
         else
         {
@@ -101,9 +108,9 @@ public class BinTree<T extends Game>
     {
         if (currNode != null)
         {
-            inOrderRec(currNode.left);    
+            inOrderRec(currNode.getLeftNode());    
             System.out.println(currNode.toString());            
-            inOrderRec(currNode.right); 
+            inOrderRec(currNode.getRightNode()); 
         }
         
     }
