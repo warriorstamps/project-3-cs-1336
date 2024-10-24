@@ -35,7 +35,7 @@ public class Node<T extends Game> implements Comparable<Node<T>>
 	{
 		this.payload = payload;
 	}
-    
+
     public void setLeftNode(Node<T> left)
     {
         this.left = left;
@@ -45,11 +45,6 @@ public class Node<T extends Game> implements Comparable<Node<T>>
     {
         this.right = right;
     }
-    // //uses game CompareTo
-    // public int compareTo(String targetName) 
-    // {
-    //     return this.payload.compareTo(targetName);
-    // }
 
     @Override
     public int compareTo(Node<T> targetNode) 
