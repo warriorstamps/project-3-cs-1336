@@ -32,7 +32,7 @@ public class Main
                     else if(num == "2") //search for a record
                     {
                         String searchTerm = line.substring(3);
-                        Node<T> check = search(searchTerm);
+                        Node<T> check = (Node<T>)search(searchTerm);
                         if(check == null) //null
                         {
                             System.out.println(searchTerm + " NOT FOUND"); //not found message 
