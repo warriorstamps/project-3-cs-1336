@@ -55,7 +55,14 @@ public class Main
                     }
                     else if(num == "4") //delete a record
                     {
-    
+                        if() //null
+                        {
+                            //not found message here
+                        }
+                        else
+                        {
+                            //print cont.
+                        }
                     }
                     else if(num == "5") //sort the records (accending alphabeticly), implement later
                     {
