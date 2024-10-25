@@ -1,10 +1,12 @@
-/*The game class stores the contents of each game */
+/* Michael Han 
+ * meh220003
+ * The game class stores the games data
+*/
 public class Game implements Comparable<Game>
-
 {
     //variables 
     private String name;
-    private int highscore; //(could be int if they don't allow doubles)
+    private int highscore; 
     private String initials;
     private int plays;
 
@@ -37,7 +39,7 @@ public class Game implements Comparable<Game>
         return name + ", " + highscore + ", " + initials + ", " + plays + ", $" + String.format("%.2f", getRevenue());
     }
 
-    //compareTo method for names, used in search? and delete?? or sort??
+    //compareTo method for names, used in search, edit, and delete
     private int compareTo(String targetName) 
     {
         //work in progress
@@ -55,7 +57,7 @@ public class Game implements Comparable<Game>
         }
     }
 
-    //compareTo method for names, used in search? and delete?? or sort??
+    //compareTo method for names, used in search, edit, and delete
     @Override
     public int compareTo(Game targetGame) 
     {

@@ -1,9 +1,14 @@
-/*The BinTree class creates a binary tree and performs
+/* Michael Han 
+ * meh220003
+ * The BinTree class creates a binary tree and performs
  * commands to interact with the tree. Includes
  * adding, searching, deleting and editing a node
  * within the tree
  */
-//import java.util.Queue; //quene class 
+import java.util.Queue; //queue class 
+import java.util.LinkedList; //linked list class, used for queue
+import java.util.ArrayList; //arrayList class, used in breathTransversal function to return a list of games
+
 public class BinTree<T extends Game> 
 {
     private Node<T> root; //root pointer 
@@ -59,12 +64,7 @@ public class BinTree<T extends Game>
         return searchRecursive(root, targetNode);
     }
 
-    // public Node<T> search(Node<T> targetNode) //search the BST for a specific node, says a not found message if node isnt found
-    // {
-    //     //call recursive funcrion
-    //     return searchRecursive(root, targetNode);
-    // }
-
+    //function to recursive call search 
     private Node<T> searchRecursive(Node<T> curr, Node<T> targetNode)
     {
         if (curr == null) //null current node, nothing 
@@ -94,12 +94,14 @@ public class BinTree<T extends Game>
 
     }
      */
-     //sort the tree in alphabeticly order.
+
+    //sort the tree in alphabetically order.
     public void sort()
     {
         inOrderRec(root);
     }
     
+    //inOrder transversal 
     public void inOrderRec(Node<T> currNode)
     {
         if (currNode != null)
@@ -108,12 +110,35 @@ public class BinTree<T extends Game>
             System.out.println(currNode.toString());            
             inOrderRec(currNode.getRightNode()); 
         }
-        
     }
-    /*
-    public void breathTransversal()
+    
+    /*Breath-first transversal */
+    public ArrayList<T> breathTransversal()
     {
-
+        //create arrayList to return game objects
+        ArrayList<T> list = new ArrayList<T>(); 
+        //create queue
+        Queue<Node<T>> queue = new LinkedList<Node<T>>();
+        queue.add(root); //enqueue root
+        //first add the root to the quene
+        while (!queue.isEmpty())
+        {
+            Node<T> curr = queue.poll(); //dequeue the first node in list
+            if (curr != null)
+            {
+                list.add(curr.getPayload()); //add game to arrayList
+                if (curr.getLeftNode() != null) //left node isn't null
+                {
+                    //add to quene
+                    queue.add(curr.getLeftNode());
+                }
+                if (curr.getRightNode() != null) //right node isn't null
+                {
+                    //add to quene
+                    queue.add(curr.getRightNode());
+                }
+            }
+        }
+        return list;
     }
-    */
 }
