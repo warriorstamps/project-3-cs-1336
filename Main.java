@@ -68,7 +68,7 @@ public class Main
                 /*implement edit/delete later */
                 else if(num.equals("5")) //sort 
                 {
-                    System.out.println("RECORDS SORTED");
+                    System.out.println("RECORDS SORTED ASCENDING");
                     tree.sort();
                     System.out.println();
                 }
