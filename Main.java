@@ -75,14 +75,30 @@ public class Main
                             System.out.println();
                         }
                     }
+                    /*implement edit/delete later */
+                    else if(num.equals("5"))
+                    {
+                        tree.sort();
+                        System.out.println();
+                    }
                     else //invalid input
                     {
                         scnr.nextLine();
                     }
                 }
-                tree.inOrderTransversal();
+                tree.sort();
                 //write to ciderCade.dat
-
+                try 
+                {
+                    FileWriter writer = new FileWriter("ciderCade.dat");
+                    //write using breath first transversal
+                    writer.write("insert here");
+                    writer.close();
+                } 
+                catch (IOException e) 
+                {
+                    System.out.println("Error creating written file");
+                }
                 //close database and batch files
                 scnr.close();
             }

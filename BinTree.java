@@ -93,13 +93,9 @@ public class BinTree<T extends Game>
     {
 
     }
-     
-    public void Sort(tree) //sort the tree in alphabeticly order. implement later 
-    {
-
-    }
-    */
-    public void inOrderTransversal()
+     */
+     //sort the tree in alphabeticly order.
+    public void sort()
     {
         inOrderRec(root);
     }
@@ -114,8 +110,8 @@ public class BinTree<T extends Game>
         }
         
     }
-/* 
-    public void breathTransversal();
+    /*
+    public void breathTransversal()
     {
 
     }
