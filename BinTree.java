@@ -84,11 +84,20 @@ public class BinTree<T extends Game>
             return curr;
         }
     }
-    /* 
-    public void Edit(tree, target, whatToEdit) //edit a node in the BST for its particular contents
+    
+    public T edit(T targetPayload, T newPayload) //edit a node in the BST for its particular contents
     {
-
+        //call search function to return the node
+        Node<T> nodeToEdit = search(targetPayload);
+        //check if it is found
+        if(nodeToEdit != null) 
+        {
+            nodeToEdit.setPayload(newPayload); //set new payload  
+        }
+        //return the edited node's payload
+        return nodeToEdit.getPayload(); 
     }
+    /* 
     public void Delete(tree, deleteNode) //remove a node from the BST
     {
 

@@ -24,7 +24,7 @@ public class Game implements Comparable<Game>
     public int getHighScore() {return highscore;}
     public String getInitals() {return initials;}
     public int getPlays() {return plays;}
-    public double getRevenue() {return plays * 0.25;} //may need this for edit
+    public double getRevenue() {return plays * 0.25;} //edit will auto update if changed
 
     //mutators
     public void setName(String newName) {name = newName;}

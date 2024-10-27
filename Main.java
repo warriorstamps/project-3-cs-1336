@@ -65,7 +65,48 @@ public class Main
                         System.out.println();
                     }
                 }
-                /*implement edit/delete later */
+                else if(num.equals("3")) //edit record
+                {
+                    int beginName = line.indexOf("\""); //find first quotation mark
+                    int endName = line.indexOf("\"", beginName + 1); //find second quotation mark
+                    String name = line.substring(beginName+1, endName); //get the name
+                    String arr[] = line.substring(endName + 2).split(" "); //split based on space, arr[0] = fieldnumber, arr[1] = value
+                    Game searchGame  = new Game(name, 0, "", 0); //create new "game" to edit for it
+                    Node<Game> targetNode = tree.search(searchGame); //stores the node if game is found
+                    if(targetNode != null) //found game
+                    {
+                        Game payloadToUpdate = targetNode.getPayload();
+                        String field = null;
+                        if(arr[0].equals("1"))
+                        {
+                            payloadToUpdate.setHighScore(Integer.parseInt(arr[1]));
+                            field = "UPDATE TO high score - VALUE " + arr[1];
+                        }
+                        else if(arr[0].equals("2"))
+                        {
+                            payloadToUpdate.setInitals(arr[1]);
+                            field = "UPDATE TO initials - VALUE " + arr[1];
+                        }
+                        else if(arr[0].equals("3"))
+                        {
+                            payloadToUpdate.setPlays(Integer.parseInt(arr[1]));
+                            field = "UPDATE TO plays - VALUE " + arr[1];
+                        }
+                        Game updatedGame = tree.edit(searchGame, payloadToUpdate); 
+                        //print out contents of edited node
+                        System.out.println(name + " UPDATED");
+                        System.out.println(field);
+                        System.out.println("High Score: " + updatedGame.getHighScore());
+                        System.out.println("Initials: " + updatedGame.getInitals());
+                        System.out.println("Plays: " + updatedGame.getPlays());
+                        System.out.printf("Revenue: $%.2f\n", updatedGame.getRevenue());
+                        System.out.println();
+                    }
+                    else
+                    {
+                        System.out.println(name + " not found");
+                    }
+                }
                 else if(num.equals("5")) //sort 
                 {
                     System.out.println("RECORDS SORTED ASCENDING");
