@@ -97,12 +97,50 @@ public class BinTree<T extends Game>
         //return the edited node's payload
         return nodeToEdit.getPayload(); 
     }
-    /* 
-    public void Delete(tree, deleteNode) //remove a node from the BST
+    /*TO DO */
+    public T delete(T deleteNode) //remove a node from the BST
     {
-
+        Node<T> isValid = search(deleteNode); //search the node to be deleted
+        if(isValid != null)
+        {
+            //call deleteRecursive method
+            deleteRecursive(root, deleteNode);
+            return deleteNode;
+        }
+        else
+        {
+            System.out.println("Node is not in list");
+            return null; 
+        }
+        
     }
-     */
+
+    //helper to recursivly delete a node
+    public T deleteRecursive(Node<T> root, T deleteNode)
+    {
+        //0 children (leaf node)
+        if (root.getLeftNode() == null && root.getRightNode() == null) 
+        {
+            return deleteNode;
+        }
+        //1 children
+        else if ((root.getLeftNode() == null && root.getRightNode() != null) || (root.getLeftNode() != null && root.getRightNode() == null)) 
+        {
+            if(root.getLeftNode() != null) //left child
+            {
+                return root.getLeftNode();
+            }
+            else //right child
+            {
+                return root.getRightNode();
+            }
+        }
+        //2 children 
+        else
+        {
+            return delete(null); 
+        }
+    }
 
     //sort the tree in alphabetically order.
     public void sort()

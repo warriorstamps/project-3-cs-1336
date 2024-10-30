@@ -13,13 +13,32 @@ public class Main
     public static void main(String [] args)
     {
         Scanner scnr = new Scanner(System.in);
-        System.out.print("Enter the database file: "); //database file
+        System.out.print("Enter the input file (existing records): "); //database file
+        String inputFileName = scnr.next();
+        System.out.print("Enter the database (write to) file: "); //database file
         String databaseName = scnr.next();
-        System.out.print("Enter the batch file: "); //batch file
+        System.out.print("Enter the batch (command) file: "); //batch file
         String batchName = scnr.next();
         scnr.close();
         //create binary tree
         BinTree<Game> tree = new BinTree<Game>(); //create an empty tree
+        //open database file
+        try
+        {
+            scnr = new Scanner(new File(inputFileName)); //open input (given records) file
+            while(scnr.hasNextLine())
+            {
+                String line = scnr.nextLine();
+                String arr[] = line.split(", "); //split based on comma + space
+                Game newGame = new Game(arr[0], Integer.parseInt(arr[1]), arr[2], Integer.parseInt(arr[3])); //create new game obj
+                tree.insert(newGame); //insert it to the BST
+            }
+            scnr.close(); //close input file
+        }
+        catch (FileNotFoundException e)
+        {
+            System.out.println("Input file not found");
+        }
         //open batch file
         try
         {
@@ -105,6 +124,24 @@ public class Main
                     else
                     {
                         System.out.println(name + " not found");
+                    }
+                }
+                else if(num.equals("4")) //delete a node
+                {
+                    String nameToDelete = line.substring(2);
+                    Game deleteGame  = new Game(nameToDelete, 0, "", 0); //create new "game" to edit for it
+                    Game deleteNode = tree.delete(deleteGame); //stores the node if game is found
+                    if(deleteNode != null) //found
+                    {
+                        System.out.println("RECORD DELETED");
+                        System.out.println("Name: " + deleteNode.getName());
+                        System.out.println("RECORD DELETED");
+                        System.out.println("RECORD DELETED");
+                        System.out.println("RECORD DELETED");
+                    }
+                    else
+                    {
+                        System.out.println(nameToDelete + " NOT FOUND");
                     }
                 }
                 else if(num.equals("5")) //sort 
