@@ -15,8 +15,6 @@ public class Main
         Scanner scnr = new Scanner(System.in);
         System.out.print("Enter the input file (existing records): "); //database file
         String inputFileName = scnr.next();
-        System.out.print("Enter the database (write to) file: "); //database file
-        String databaseName = scnr.next();
         System.out.print("Enter the batch (command) file: "); //batch file
         String batchName = scnr.next();
         scnr.close();
@@ -130,14 +128,19 @@ public class Main
                 {
                     String nameToDelete = line.substring(2);
                     Game deleteGame  = new Game(nameToDelete, 0, "", 0); //create new "game" to edit for it
-                    Game deleteNode = tree.delete(deleteGame); //stores the node if game is found
+                    Node<Game> deleteNode = tree.search(deleteGame); //stores the node if game is found
                     if(deleteNode != null) //found
                     {
+                        //print out delete node contents
                         System.out.println("RECORD DELETED");
-                        System.out.println("Name: " + deleteNode.getName());
-                        System.out.println("RECORD DELETED");
-                        System.out.println("RECORD DELETED");
-                        System.out.println("RECORD DELETED");
+                        System.out.println("Name: " + nameToDelete);
+                        System.out.println("Highscore: " + deleteNode.getPayload().getHighScore());
+                        System.out.println("Initials: " + deleteNode.getPayload().getInitals());
+                        System.out.println("Plays: " + deleteNode.getPayload().getPlays());
+                        System.out.printf("Revenue: $%.2f\n", deleteNode.getPayload().getRevenue());
+                        System.out.println();
+                        // actually delete the node
+                        tree.delete(deleteNode.getPayload());
                     }
                     else
                     {
@@ -164,7 +167,7 @@ public class Main
         // write contents from bintree to database file using breath-first transversal
         try
         {
-            FileWriter writer = new FileWriter(databaseName); //create a fileWriter
+            FileWriter writer = new FileWriter("cidercade.dat"); //create a fileWriter 
             ArrayList<Game> games = tree.breathTransversal(); //create a arrayList of games to be written on
             for (Game game : games) //for each game object on the list
             {

@@ -98,48 +98,62 @@ public class BinTree<T extends Game>
         return nodeToEdit.getPayload(); 
     }
     /*TO DO */
-    public T delete(T deleteNode) //remove a node from the BST
+    public void delete(T payloadToDelete) //remove a node from the BST
     {
-        Node<T> isValid = search(deleteNode); //search the node to be deleted
-        if(isValid != null)
-        {
-            //call deleteRecursive method
-            deleteRecursive(root, deleteNode);
-            return deleteNode;
-        }
-        else
-        {
-            System.out.println("Node is not in list");
-            return null; 
-        }
-        
+        //go into recursion 
+        root = deleteRecursive(root, payloadToDelete);
     }
 
     //helper to recursivly delete a node
-    public T deleteRecursive(Node<T> root, T deleteNode)
+    private Node<T> deleteRecursive(Node<T> root, T payloadToDelete)
     {
-        //0 children (leaf node)
-        if (root.getLeftNode() == null && root.getRightNode() == null) 
+        if (root == null) //no tree/empty
         {
-            return deleteNode;
+            return root;
         }
-        //1 children
-        else if ((root.getLeftNode() == null && root.getRightNode() != null) || (root.getLeftNode() != null && root.getRightNode() == null)) 
+
+        //searching for target delete node
+        if (payloadToDelete.compareTo(root.getPayload()) < 0) //move to left
         {
-            if(root.getLeftNode() != null) //left child
+            root.setLeftNode(deleteRecursive(root.getLeftNode(), payloadToDelete));
+        }
+        else if (payloadToDelete.compareTo(root.getPayload()) > 0) //move to right 
+        {
+            root.setRightNode(deleteRecursive(root.getRightNode(), payloadToDelete));
+        }
+        else //found
+        {
+            //0 children (leaf node)
+            if (root.getLeftNode() == null && root.getRightNode() == null) 
             {
-                return root.getLeftNode();
+                return null;
             }
-            else //right child
+            //1 children, fall through
+            if (root.getLeftNode() == null) 
             {
                 return root.getRightNode();
             }
+            else if (root.getRightNode() == null)
+            {
+                return root.getLeftNode();
+            }
+            //2 children 
+            root.setPayload(findSmallest(root.getRightNode())); //swap nodes using this operation
+            root.setRightNode(deleteRecursive(root.getRightNode(), root.getPayload())); //recursive call
         }
-        //2 children 
-        else
+        return root;   
+    }
+
+    //function to find smallest payload AFTER target node
+    private T findSmallest(Node<T> curr)
+    {
+        T min = curr.getPayload();
+        while (curr.getLeftNode() != null) //find leftmost leaf
         {
-            return delete(null); 
+            min = curr.getLeftNode().getPayload();
+            curr = curr.getLeftNode();
         }
+        return min;
     }
 
     //sort the tree in alphabetically order.
